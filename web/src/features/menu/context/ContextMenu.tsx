@@ -56,6 +56,7 @@ const useStyles = createStyles((theme) => ({
   titleText: {
     color: theme.white,
     fontSize: 16,
+    fontWeight: 600,
     textAlign: 'center',
   },
   buttonsContainer: {

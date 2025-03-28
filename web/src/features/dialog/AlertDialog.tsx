@@ -24,7 +24,7 @@ const useStyles = createStyles((theme) => ({
     backgroundColor: 'rgba(26, 26, 26, 0.85)',
     borderRadius: theme.radius.lg,
     boxShadow: '0 8px 32px rgba(0, 0, 0, 0.35)',
-    border: `1px solid ${theme.colors.dark[4]}`,
+    border: `1.33px solid ${theme.colors.dark[4]}`,
   },
   button: {
     textTransform: 'uppercase',
@@ -67,7 +67,7 @@ const AlertDialog: React.FC = () => {
       closeOnClickOutside={false}
       onClose={() => closeAlert('cancel')}
       withCloseButton={false}
-      overlayOpacity={0.55}
+      overlayOpacity={0.44}
       overlayBlur={8}
       exitTransitionDuration={150}
       transition="fade"
