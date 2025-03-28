@@ -46,7 +46,7 @@ const useStyles = createStyles((theme) => ({
     transition: 'all 0.2s ease',
     '&:hover': {
       cursor: 'pointer',
-      fill: '#2B9E74',
+      fill: '#ff5050',
     },
   },
   centerIconContainer: {

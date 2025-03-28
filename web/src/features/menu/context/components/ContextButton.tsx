@@ -35,7 +35,7 @@ const useStyles = createStyles((theme, params: { disabled?: boolean; readOnly?: 
     transition: 'all 0.2s ease',
     '&:hover': {
       backgroundColor: params.readOnly
-        ? 'rgba(255, 255, 255, 0.03)'
+        ? 'rgba(151, 4, 4, 0.03)'
         : 'rgba(255, 255, 255, 0.06)',
       borderColor: params.readOnly ? 'transparent' : theme.colors.dark[4],
       cursor: params.readOnly ? 'default' : 'pointer',

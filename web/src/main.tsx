@@ -15,9 +15,9 @@ library.add(fas, far, fab);
 
 if (isEnvBrowser()) {
   const root = document.getElementById('root');
-
+  // https://i.imgur.com/3pzRj9n.png - Day time img
   // https://i.imgur.com/iPTAdYV.png - Night time img
-  root!.style.backgroundImage = 'url("https://i.imgur.com/3pzRj9n.png")';
+  root!.style.backgroundImage = 'url("https://img.sdcexec.com/files/base/acbm/sdce/image/2020/11/Amazon_JAN1_AR_Sort_Rendering_11_12_2020.5fad64a35525f.png?auto=format%2Ccompress&fit=crop&h=288&q=70&w=512")';
   root!.style.backgroundSize = 'cover';
   root!.style.backgroundRepeat = 'no-repeat';
   root!.style.backgroundPosition = 'center';

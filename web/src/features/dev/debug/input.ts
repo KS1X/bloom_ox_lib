@@ -6,7 +6,7 @@ export const debugInput = () => {
     {
       action: 'openDialog',
       data: {
-        heading: 'Police locker',
+        heading: 'Locker Settings',
         rows: [
           {
             type: 'input',

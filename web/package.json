@@ -53,6 +53,16 @@
   "pnpm": {
     "patchedDependencies": {
       "react-hot-toast@2.4.0": "patches/react-hot-toast@2.4.0.patch"
-    }
+    },
+    "ignoredBuiltDependencies": [
+      "@fortawesome/fontawesome-svg-core",
+      "@fortawesome/free-brands-svg-icons",
+      "@fortawesome/free-regular-svg-icons",
+      "@fortawesome/free-solid-svg-icons",
+      "esbuild"
+    ],
+    "onlyBuiltDependencies": [
+      "@fortawesome/fontawesome-common-types"
+    ]
   }
 }

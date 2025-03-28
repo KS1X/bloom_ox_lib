@@ -7,7 +7,7 @@ export const debugAlert = () => {
       action: 'sendAlert',
       data: {
         header: 'Hello there',
-        content: 'General kenobi  \n Markdown works',
+        content: 'This is some information about something or whatever.  \n Markdown works',
         centered: true,
         size: 'lg',
         overflow: true,

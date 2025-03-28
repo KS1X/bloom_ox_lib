@@ -6,12 +6,12 @@ export const debugContext = () => {
     {
       action: 'showContext',
       data: {
-        title: 'Vehicle garage',
+        title: 'Cotext Menu',
         options: [
           { title: 'Empty button' },
           {
-            title: 'Karin Kuruma',
-            image: 'https://cdn.discordapp.com/attachments/1063098499027173461/1064276343585505330/screenshot.jpg',
+            title: 'Extended button',
+            image: 'https://www.onlinemadison.com/uploads/original/20220817-181711-IMG-1534.jpg',
             arrow: true,
             colorScheme: 'blue',
             metadata: [
@@ -46,7 +46,7 @@ export const debugContext = () => {
             disabled: true,
           },
           {
-            title: 'Oil Level',
+            title: 'New Level',
             description: 'Vehicle oil level',
             progress: 30,
             icon: 'oil-can',
