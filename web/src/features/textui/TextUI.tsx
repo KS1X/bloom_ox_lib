@@ -21,15 +21,15 @@ const useStyles = createStyles((theme, params: { position?: TextUiPosition }) =>
       params.position === 'right-center' ? 'flex-end' :
       params.position === 'left-center' ? 'flex-start' : 'center',
     pointerEvents: 'none',
-    padding: 20,
+    padding: 14,
   },
   container: {
     fontSize: 15,
     padding: '12px 16px',
-    backgroundColor: 'rgba(30, 30, 30, 0.85)',
+    backgroundColor: 'rgba(32, 32, 32, 0.75)',
     color: theme.white,
     fontFamily: 'Roboto, sans-serif',
-    borderRadius: theme.radius.md,
+    borderRadius: theme.radius.lg,
     boxShadow: '0 10px 25px rgba(0, 0, 0, 0.35)',
     backdropFilter: 'blur(8px)',
     border: `1px solid rgba(255, 255, 255, 0.08)`,
