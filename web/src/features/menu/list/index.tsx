@@ -10,29 +10,31 @@ import LibIcon from '../../../components/LibIcon';
 
 const useStyles = createStyles((theme, params: { position?: MenuPosition; itemCount: number; selected: number }) => ({
   tooltip: {
-    backgroundColor: 'rgba(30, 30, 30, 0.85)',
+    backgroundColor: 'rgba(30, 30, 30, 0.9)', // Slightly more opaque
     color: theme.white,
     borderRadius: theme.radius.md,
     maxWidth: 350,
     whiteSpace: 'normal',
-    backdropFilter: 'blur(8px)',
     border: `1px solid ${theme.colors.dark[4]}`,
-    padding: '10px 14px',
+    padding: '12px 16px', // Increased padding
     fontSize: 14,
+    boxShadow: '0 8px 24px rgba(0, 0, 0, 0.4)', // Enhanced shadow
+    backdropFilter: 'blur(6px)', // Glass effect
   },
   container: {
     position: 'absolute',
     pointerEvents: 'none',
-    marginTop: params.position === 'top-left' || params.position === 'top-right' ? 5 : 0,
-    marginLeft: params.position === 'top-left' || params.position === 'bottom-left' ? 5 : 0,
-    marginRight: params.position === 'top-right' || params.position === 'bottom-right' ? 5 : 0,
-    marginBottom: params.position === 'bottom-left' || params.position === 'bottom-right' ? 5 : 0,
+    marginTop: params.position === 'top-left' || params.position === 'top-right' ? 8 : 0, // Increased margin
+    marginLeft: params.position === 'top-left' || params.position === 'bottom-left' ? 8 : 0,
+    marginRight: params.position === 'top-right' || params.position === 'bottom-right' ? 8 : 0,
+    marginBottom: params.position === 'bottom-left' || params.position === 'bottom-right' ? 8 : 0,
     right: params.position === 'top-right' || params.position === 'bottom-right' ? 1 : undefined,
     left: params.position === 'bottom-left' ? 1 : undefined,
     bottom: params.position === 'bottom-left' || params.position === 'bottom-right' ? 1 : undefined,
     fontFamily: 'Roboto',
     borderRadius: theme.radius.lg,
-    boxShadow: '0 15px 35px rgba(0,0,0,0.5)',
+    boxShadow: '0 20px 50px rgba(0,0,0,0.6)', // Enhanced shadow
+    backdropFilter: 'blur(8px)', // Glass effect
     width: 384,
   },
   buttonsWrapper: {
@@ -41,7 +43,6 @@ const useStyles = createStyles((theme, params: { position?: MenuPosition; itemCo
     overflow: 'hidden',
     borderRadius: params.itemCount <= 6 || params.selected === params.itemCount - 1 ? theme.radius.md : undefined,
     backgroundColor: 'rgba(26, 26, 26, 0.9)',
-    backdropFilter: 'blur(10px)',
     borderTopLeftRadius: 0,
     borderTopRightRadius: 0,
   },
@@ -50,15 +51,19 @@ const useStyles = createStyles((theme, params: { position?: MenuPosition; itemCo
     textAlign: 'center',
     borderBottomLeftRadius: theme.radius.md,
     borderBottomRightRadius: theme.radius.md,
-    height: 28,
+    height: 32, // Slightly larger
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    transition: 'background-color 0.2s ease',
+    transition: 'all 0.2s ease', // Enhanced transition
+    '&:hover': {
+      backgroundColor: 'rgba(46, 166, 122, 0.1)', // Subtle primary color hover
+    },
   },
   scrollArrowIcon: {
-    color: theme.colors.dark[2],
+    color: theme.colors.dark[1], // Better contrast
     fontSize: 20,
+    transition: 'color 0.2s ease',
   },
 }));
 
@@ -230,7 +235,7 @@ const ListMenu: React.FC = () => {
             <Header title={menu.title} />
             <Box className={classes.buttonsWrapper} onKeyDown={(e: React.KeyboardEvent<HTMLDivElement>) => moveMenu(e)}>
               <FocusTrap active={visible}>
-                <Stack spacing={8} p={8} sx={{ overflowY: 'scroll' }}>
+                <Stack spacing={10} p={12} sx={{ overflowY: 'scroll' }}> {/* Increased spacing and padding */}
                   {menu.items.map((item, index) => (
                     <React.Fragment key={`menu-item-${index}`}>
                       {item.label && (

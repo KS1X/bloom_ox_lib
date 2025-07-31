@@ -30,11 +30,11 @@ const useStyles = createStyles((theme) => ({
     pointerEvents: 'auto',
   },
   menuWrapper: {
-    backgroundColor: 'rgba(26, 26, 26, 0.9)',
-    backdropFilter: 'blur(12px)',
+    backgroundColor: 'rgba(26, 26, 26, 0.9)', // Consistent with other components
     borderRadius: theme.radius.lg,
     border: `1px solid ${theme.colors.dark[4]}`,
-    boxShadow: '0 10px 30px rgba(0,0,0,0.45)',
+    boxShadow: '0 10px 40px rgba(0, 0, 0, 0.45)', // Enhanced shadow for better depth
+    backdropFilter: 'blur(8px)', // Modern glass effect
     height: '100%',
     display: 'flex',
     flexDirection: 'column',
@@ -43,14 +43,14 @@ const useStyles = createStyles((theme) => ({
   header: {
     justifyContent: 'center',
     alignItems: 'center',
-    padding: theme.spacing.xs,
+    padding: theme.spacing.sm,
     borderBottom: `1px solid ${theme.colors.dark[4]}`,
-    backgroundColor: 'rgba(32, 32, 32, 0.75)',
-    gap: 6,
+    backgroundColor: 'rgba(32, 32, 32, 0.85)', // Slightly more opaque
+    gap: 8, // Increased spacing
   },
   titleContainer: {
     flex: '1 85%',
-    padding: '4px 8px',
+    padding: '6px 12px', // Increased padding
     borderRadius: theme.radius.sm,
   },
   titleText: {
@@ -58,14 +58,15 @@ const useStyles = createStyles((theme) => ({
     fontSize: 16,
     fontWeight: 600,
     textAlign: 'center',
+    lineHeight: 1.4, // Better text readability
   },
   buttonsContainer: {
     flex: 1,
     overflowY: 'auto',
-    padding: theme.spacing.sm,
+    padding: theme.spacing.md, // Increased padding
   },
   buttonsFlexWrapper: {
-    gap: 6,
+    gap: 8, // Increased gap between buttons
   },
 }));
 

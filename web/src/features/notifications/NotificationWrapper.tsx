@@ -16,8 +16,6 @@ const useStyles = createStyles((theme) => ({
     padding: 14,
     borderRadius: theme.radius.lg,
     fontFamily: 'Roboto',
-    backdropFilter: 'blur(10px)',
-    boxShadow: '0 10px 25px rgba(0, 0, 0, 0.4)',
     border: `1px solid ${theme.colors.dark[4]}`,
   },
   title: {

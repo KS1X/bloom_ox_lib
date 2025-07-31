@@ -32,22 +32,66 @@ export type FormValues = {
 
 const useStyles = createStyles((theme) => ({
   modal: {
-    backdropFilter: 'blur(12px)',
-    backgroundColor: 'rgba(26, 26, 26, 0.9)',
+    backgroundColor: 'rgba(26, 26, 26, 0.9)', // Consistent with other components
     borderRadius: theme.radius.lg,
-    boxShadow: '0 8px 24px rgba(0, 0, 0, 0.4)',
-    border: `1px solid ${theme.colors.dark[4]}`,
+    boxShadow: '0 10px 40px rgba(0, 0, 0, 0.45)', // Enhanced shadow for better depth
+    border: `1px solid ${theme.colors.dark[4]}`, // Consistent border width
+    backdropFilter: 'blur(8px)', // Modern glass effect
+  },
+  title: {
+    color: theme.white,
+    fontSize: 18,
+    fontWeight: 600,
+    textAlign: 'center',
+    marginBottom: theme.spacing.xs,
+  },
+  contentStack: {
+    gap: theme.spacing.md,
+  },
+  formContainer: {
+    gap: theme.spacing.sm,
+  },
+  buttonGroup: {
+    marginTop: theme.spacing.lg,
+    gap: theme.spacing.sm,
   },
   button: {
     textTransform: 'uppercase',
     fontWeight: 500,
-    height: 36,
     letterSpacing: 0.5,
+    height: 40, // Slightly larger for better touch targets
+    borderRadius: theme.radius.md,
+    transition: 'all 0.2s ease',
+    '&:hover': {
+      transform: 'translateY(-1px)',
+      boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
+    },
   },
-  title: {
-    textAlign: 'center',
-    fontSize: 18,
+  cancelButton: {
+    backgroundColor: 'rgba(255, 255, 255, 0.05)',
+    border: `1px solid ${theme.colors.dark[4]}`,
+    color: theme.colors.dark[1],
+    '&:hover': {
+      backgroundColor: 'rgba(255, 255, 255, 0.1)',
+      borderColor: theme.colors.dark[3],
+      color: theme.white,
+    },
+    '&:disabled': {
+      backgroundColor: 'rgba(255, 255, 255, 0.02)',
+      borderColor: theme.colors.dark[5],
+      color: theme.colors.dark[4],
+      cursor: 'not-allowed',
+      transform: 'none',
+      boxShadow: 'none',
+    },
+  },
+  confirmButton: {
+    backgroundColor: '#2EA67A', // Project primary color
+    border: 'none',
     color: theme.white,
+    '&:hover': {
+      backgroundColor: '#267A5C', // Darker shade for hover
+    },
   },
 }));
 
@@ -131,67 +175,67 @@ const InputDialog: React.FC = () => {
       size="sm"
       title={<div className={classes.title}>{fields.heading}</div>}
       withCloseButton={false}
-      overlayOpacity={0.5}
-      overlayBlur={8}
+      overlayOpacity={0.5} // Slightly increased for better focus
+      overlayBlur={12} // Enhanced blur for modern feel
       transition="fade"
-      exitTransitionDuration={150}
+      exitTransitionDuration={200}
       classNames={{ modal: classes.modal }}
     >
       <form onSubmit={onSubmit}>
-        <Stack>
-          {fieldForm.fields.map((item, index) => {
-            const row = fields.rows[index];
-            return (
-              <React.Fragment key={item.id}>
-                {row.type === 'input' && (
-                  <InputField
-                    register={form.register(`test.${index}.value`, { required: row.required })}
-                    row={row}
-                    index={index}
-                  />
-                )}
-                {row.type === 'checkbox' && (
-                  <CheckboxField
-                    register={form.register(`test.${index}.value`, { required: row.required })}
-                    row={row}
-                    index={index}
-                  />
-                )}
-                {(row.type === 'select' || row.type === 'multi-select') && (
-                  <SelectField row={row} index={index} control={form.control} />
-                )}
-                {row.type === 'number' && <NumberField control={form.control} row={row} index={index} />}
-                {row.type === 'slider' && <SliderField control={form.control} row={row} index={index} />}
-                {row.type === 'color' && <ColorField control={form.control} row={row} index={index} />}
-                {row.type === 'time' && <TimeField control={form.control} row={row} index={index} />}
-                {(row.type === 'date' || row.type === 'date-range') && (
-                  <DateField control={form.control} row={row} index={index} />
-                )}
-                {row.type === 'textarea' && (
-                  <TextareaField
-                    register={form.register(`test.${index}.value`, { required: row.required })}
-                    row={row}
-                    index={index}
-                  />
-                )}
-              </React.Fragment>
-            );
-          })}
+        <Stack className={classes.contentStack}>
+          <Stack className={classes.formContainer}>
+            {fieldForm.fields.map((item, index) => {
+              const row = fields.rows[index];
+              return (
+                <React.Fragment key={item.id}>
+                  {row.type === 'input' && (
+                    <InputField
+                      register={form.register(`test.${index}.value`, { required: row.required })}
+                      row={row}
+                      index={index}
+                    />
+                  )}
+                  {row.type === 'checkbox' && (
+                    <CheckboxField
+                      register={form.register(`test.${index}.value`, { required: row.required })}
+                      row={row}
+                      index={index}
+                    />
+                  )}
+                  {(row.type === 'select' || row.type === 'multi-select') && (
+                    <SelectField row={row} index={index} control={form.control} />
+                  )}
+                  {row.type === 'number' && <NumberField control={form.control} row={row} index={index} />}
+                  {row.type === 'slider' && <SliderField control={form.control} row={row} index={index} />}
+                  {row.type === 'color' && <ColorField control={form.control} row={row} index={index} />}
+                  {row.type === 'time' && <TimeField control={form.control} row={row} index={index} />}
+                  {(row.type === 'date' || row.type === 'date-range') && (
+                    <DateField control={form.control} row={row} index={index} />
+                  )}
+                  {row.type === 'textarea' && (
+                    <TextareaField
+                      register={form.register(`test.${index}.value`, { required: row.required })}
+                      row={row}
+                      index={index}
+                    />
+                  )}
+                </React.Fragment>
+              );
+            })}
+          </Stack>
 
-          <Group position="right" spacing={10}>
+          <Group position="right" spacing={12} className={classes.buttonGroup}>
             <Button
               variant="default"
               onClick={() => handleClose()}
-              className={classes.button}
+              className={`${classes.button} ${classes.cancelButton}`}
               disabled={fields.options?.allowCancel === false}
             >
               {locale.ui.cancel}
             </Button>
             <Button
-              variant="filled"
-              color={theme.primaryColor}
               type="submit"
-              className={classes.button}
+              className={`${classes.button} ${classes.confirmButton}`}
             >
               {locale.ui.confirm}
             </Button>

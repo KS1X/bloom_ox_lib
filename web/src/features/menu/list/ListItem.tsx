@@ -17,37 +17,45 @@ const useStyles = createStyles((theme, params: { iconColor?: string }) => ({
   buttonContainer: {
     backgroundColor: 'rgba(255, 255, 255, 0.03)',
     borderRadius: theme.radius.md,
-    padding: 6,
-    height: 60,
+    padding: 8, // Increased padding
+    height: 64, // Slightly larger for better touch targets
     scrollMargin: 8,
-    transition: 'background-color 0.2s ease',
+    transition: 'all 0.2s ease', // Enhanced transition
+    border: '1px solid transparent', // Add border for hover effect
     '&:focus': {
-      backgroundColor: 'rgba(255, 255, 255, 0.08)',
+      backgroundColor: 'rgba(46, 166, 122, 0.15)', // Primary color focus
+      borderColor: '#2EA67A', // Primary color border
       outline: 'none',
+      transform: 'translateY(-1px)', // Subtle lift
+      boxShadow: '0 4px 12px rgba(46, 166, 122, 0.2)', // Primary color shadow
     },
     '&:hover': {
-      backgroundColor: 'rgba(255, 255, 255, 0.05)',
+      backgroundColor: 'rgba(255, 255, 255, 0.06)', // Enhanced hover
+      borderColor: theme.colors.dark[3], // Subtle border
+      transform: 'translateY(-1px)', // Lift effect
+      boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)', // Hover shadow
     },
   },
   iconImage: {
     maxWidth: 28,
-    borderRadius: 4,
+    borderRadius: 6, // More rounded
   },
   buttonWrapper: {
-    paddingLeft: 6,
-    paddingRight: 12,
+    paddingLeft: 8, // Increased padding
+    paddingRight: 14,
     height: '100%',
     width: '100%',
   },
   iconContainer: {
     display: 'flex',
     alignItems: 'center',
-    width: 28,
-    height: 28,
+    width: 32, // Slightly larger
+    height: 32,
   },
   icon: {
     fontSize: 22,
-    color: params.iconColor || theme.colors.dark[2],
+    color: params.iconColor || theme.colors.dark[1], // Better contrast
+    transition: 'color 0.2s ease', // Smooth color transition
   },
   label: {
     color: theme.white,
@@ -55,23 +63,27 @@ const useStyles = createStyles((theme, params: { iconColor?: string }) => ({
     fontSize: 11,
     fontWeight: 500,
     letterSpacing: 0.5,
+    lineHeight: 1.3, // Better line height
   },
   chevronIcon: {
-    fontSize: 13,
-    color: theme.colors.dark[3],
+    fontSize: 14, // Slightly larger
+    color: theme.colors.dark[2], // Better contrast
+    transition: 'color 0.2s ease',
   },
   scrollIndexValue: {
-    color: theme.colors.dark[1],
+    color: theme.colors.dark[0], // Better contrast
     fontSize: 13,
+    fontWeight: 500, // Slightly bolder
   },
   progressStack: {
     width: '100%',
-    marginRight: 5,
+    marginRight: 6, // Increased margin
   },
   progressLabel: {
     fontSize: 12,
-    color: theme.colors.dark[1],
-    marginBottom: 2,
+    color: theme.colors.dark[0], // Better contrast
+    marginBottom: 3, // Increased margin
+    fontWeight: 500, // Slightly bolder
   },
 }));
 
@@ -134,8 +146,16 @@ const ListItem = forwardRef<Array<HTMLDivElement | null>, Props>(({ item, index,
             <Text className={classes.progressLabel}>{item.label}</Text>
             <Progress
               value={item.progress}
-              color={item.colorScheme || 'dark.0'}
-              styles={(theme) => ({ root: { backgroundColor: theme.colors.dark[3] } })}
+              color={item.colorScheme || '#2EA67A'} // Use project primary color as default
+              styles={(theme) => ({ 
+                root: { 
+                  backgroundColor: theme.colors.dark[4],
+                  borderRadius: theme.radius.sm,
+                },
+                bar: {
+                  borderRadius: theme.radius.sm,
+                }
+              })}
             />
           </Stack>
         ) : (

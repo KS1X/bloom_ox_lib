@@ -24,58 +24,62 @@ const useStyles = createStyles((theme, params: { disabled?: boolean; readOnly?: 
     color: params.disabled ? theme.colors.dark[3] : theme.white,
     whiteSpace: 'pre-wrap',
     fontSize: 14,
+    lineHeight: 1.5, // Better readability
   },
   button: {
     height: 'fit-content',
     width: '100%',
-    padding: 12,
+    padding: 14, // Increased padding
     backgroundColor: 'rgba(255, 255, 255, 0.03)',
     borderRadius: theme.radius.md,
     border: `1px solid transparent`,
     transition: 'all 0.2s ease',
     '&:hover': {
       backgroundColor: params.readOnly
-        ? 'rgba(151, 4, 4, 0.03)'
-        : 'rgba(255, 255, 255, 0.06)',
-      borderColor: params.readOnly ? 'transparent' : theme.colors.dark[4],
+        ? 'rgba(151, 4, 4, 0.05)'
+        : 'rgba(255, 255, 255, 0.08)', // Enhanced hover state
+      borderColor: params.readOnly ? 'transparent' : theme.colors.dark[2], // Lighter border
       cursor: params.readOnly ? 'default' : 'pointer',
+      transform: params.readOnly ? 'none' : 'translateY(-1px)', // Subtle lift effect
+      boxShadow: params.readOnly ? 'none' : '0 4px 12px rgba(0, 0, 0, 0.25)', // Hover shadow
     },
     '&:active': {
-      transform: params.readOnly ? 'none' : 'scale(0.99)',
+      transform: params.readOnly ? 'none' : 'scale(0.98)', // Slightly more pronounced
     },
   },
   iconImage: {
     maxWidth: '24px',
-    borderRadius: 4,
+    borderRadius: 6, // Slightly more rounded
   },
   description: {
-    color: params.disabled ? theme.colors.dark[3] : theme.colors.dark[2],
+    color: params.disabled ? theme.colors.dark[3] : theme.colors.dark[1], // Better contrast
     fontSize: 12,
     lineHeight: 1.4,
   },
   dropdown: {
-    padding: 12,
+    padding: 14, // Increased padding
     color: theme.white,
     fontSize: 14,
     maxWidth: 256,
     width: 'fit-content',
     borderRadius: theme.radius.md,
     backgroundColor: 'rgba(30, 30, 30, 0.95)',
-    backdropFilter: 'blur(10px)',
     border: `1px solid ${theme.colors.dark[4]}`,
+    boxShadow: '0 8px 24px rgba(0, 0, 0, 0.4)', // Enhanced shadow
+    backdropFilter: 'blur(8px)', // Glass effect
     overflow: 'hidden',
   },
   buttonStack: {
-    gap: 4,
+    gap: 6, // Increased gap
     flex: 1,
   },
   buttonGroup: {
-    gap: 6,
+    gap: 8, // Increased gap
     flexWrap: 'nowrap',
   },
   buttonIconContainer: {
-    width: 26,
-    height: 26,
+    width: 28, // Slightly larger
+    height: 28,
     justifyContent: 'center',
     alignItems: 'center',
     display: 'flex',
@@ -84,19 +88,20 @@ const useStyles = createStyles((theme, params: { disabled?: boolean; readOnly?: 
   buttonTitleText: {
     overflowWrap: 'break-word',
     fontWeight: 500,
+    lineHeight: 1.3, // Better line height
   },
   buttonArrowContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-    width: 24,
-    height: 24,
+    width: 26, // Slightly larger
+    height: 26,
     display: 'flex',
     flexShrink: 0,
   },
   scrollWrapper: {
     maxHeight: 250,
     overflowY: 'auto',
-    paddingRight: 4,
+    paddingRight: 6, // Increased padding
     maskImage:'linear-gradient(to bottom, rgba(0,0,0,1) 96%, rgba(0,0,0,0.15) 98%, rgba(0,0,0,0) 100%)',
     WebkitMaskImage:'linear-gradient(to bottom, rgba(0,0,0,1) 96%, rgba(0,0,0,0.15) 98%, rgba(0,0,0,0) 100%)',
     maskSize: '100% 100%',
@@ -165,7 +170,15 @@ const ContextButton: React.FC<{
                   </Text>
                 )}
                 {button.progress !== undefined && (
-                  <Progress value={button.progress} size="sm" color={button.colorScheme || 'dark.3'} />
+                  <Progress 
+                    value={button.progress} 
+                    size="sm" 
+                    color={button.colorScheme || '#2EA67A'} // Use project primary color as default
+                    styles={(theme) => ({
+                      root: { backgroundColor: theme.colors.dark[4] },
+                      bar: { borderRadius: theme.radius.sm }
+                    })}
+                  />
                 )}
               </Stack>
               {(button.menu || button.arrow) && button.arrow !== false && (
@@ -197,7 +210,11 @@ const ContextButton: React.FC<{
                     <Progress
                       value={metadata.progress}
                       size="sm"
-                      color={metadata.colorScheme || button.colorScheme || 'dark.3'}
+                      color={metadata.colorScheme || button.colorScheme || '#2EA67A'} // Use project primary color as default
+                      styles={(theme) => ({
+                        root: { backgroundColor: theme.colors.dark[4] },
+                        bar: { borderRadius: theme.radius.sm }
+                      })}
                     />
                   )}
                 </div>

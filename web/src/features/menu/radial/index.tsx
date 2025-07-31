@@ -18,10 +18,14 @@ const useStyles = createStyles((theme) => ({
     pointerEvents: 'auto',
   },
   sector: {
-    fill: 'rgba(255, 255, 255, 0.03)',
-    transition: 'fill 0.2s ease',
+    fill: 'rgba(255, 255, 255, 0.06)', // Slightly more visible base
+    stroke: 'rgba(255, 255, 255, 0.02)', // Subtle border
+    strokeWidth: 0.5,
+    transition: 'all 0.25s ease',
     '&:hover': {
-      fill: '#30AF82',
+      fill: '#2EA67A',
+      stroke: '#34B485', // Lighter shade for border highlight
+      strokeWidth: 1.5,
       cursor: 'pointer',
       '> g > text, > g > svg > path': {
         fill: '#ffffff',
@@ -31,22 +35,32 @@ const useStyles = createStyles((theme) => ({
       fill: '#ffffff',
       fontWeight: 500,
       strokeWidth: 0,
+      paintOrder: 'stroke fill', // Better text rendering
     },
   },
   backgroundCircle: {
-    fill: 'rgba(26, 26, 26, 0.85)',
-    backdropFilter: 'blur(8px)',
-    stroke: 'rgba(255, 255, 255, 0.05)',
-    strokeWidth: 1,
+    fill: 'rgba(26, 26, 26, 0.95)', // More opaque for better contrast
+    stroke: 'rgba(255, 255, 255, 0.12)', // More visible border
+    strokeWidth: 2,
+    // Using nested circle for depth effect instead of drop-shadow
+    '&::before': {
+      content: '""',
+      position: 'absolute',
+      borderRadius: '50%',
+      background: 'radial-gradient(circle at center, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 70%, transparent 100%)',
+    },
   },
   centerCircle: {
-    fill: '#30AF82',
-    stroke: 'rgba(0, 0, 0, 0.25)',
-    strokeWidth: 2,
-    transition: 'all 0.2s ease',
+    fill: '#2EA67A',
+    stroke: 'rgba(0, 0, 0, 0.4)', // Darker stroke for definition
+    strokeWidth: 2.5,
+    transition: 'all 0.25s ease',
     '&:hover': {
       cursor: 'pointer',
-      fill: '#ff5050',
+      fill: '#dc3545',
+      stroke: 'rgba(220, 53, 69, 0.8)', // Matching stroke color
+      strokeWidth: 3,
+      transform: 'scale(1.05)',
     },
   },
   centerIconContainer: {
@@ -55,10 +69,31 @@ const useStyles = createStyles((theme) => ({
     left: '50%',
     transform: 'translate(-50%, -50%)',
     pointerEvents: 'none',
+    // Adding background for better icon visibility
+    '&::before': {
+      content: '""',
+      position: 'absolute',
+      top: '50%',
+      left: '50%',
+      transform: 'translate(-50%, -50%)',
+      width: '60px',
+      height: '60px',
+      borderRadius: '50%',
+      background: 'radial-gradient(circle, rgba(0,0,0,0.3) 0%, transparent 70%)',
+      zIndex: -1,
+    },
   },
   centerIcon: {
     color: '#ffffff',
-    textShadow: '0 0 6px rgba(0, 0, 0, 0.35)',
+    // Using border and multiple shadows for text outline effect
+    WebkitTextStroke: '1px rgba(0, 0, 0, 0.5)',
+    textShadow: `
+      1px 1px 0 rgba(0, 0, 0, 0.8),
+      -1px -1px 0 rgba(0, 0, 0, 0.8),
+      1px -1px 0 rgba(0, 0, 0, 0.8),
+      -1px 1px 0 rgba(0, 0, 0, 0.8),
+      0 2px 4px rgba(0, 0, 0, 0.6)
+    `,
   },
 }));
 
@@ -243,7 +278,7 @@ const RadialMenu: React.FC = () => {
                 }
               }}
             >
-              <circle r={28} className={classes.centerCircle} />
+              <circle r={30} className={classes.centerCircle} />
             </g>
           </svg>
           <div className={classes.centerIconContainer}>

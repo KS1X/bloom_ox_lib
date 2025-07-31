@@ -1,6 +1,29 @@
 import { useCallback, useEffect, useState } from 'react';
+import { createStyles } from '@mantine/core';
 import type { SkillCheckProps } from '../../typings';
 import { useInterval } from '@mantine/hooks';
+
+const useStyles = createStyles((theme) => ({
+  indicator: {
+    fill: 'none',
+    stroke: '#F24B4B',
+    strokeWidth: 16,
+    strokeLinecap: 'round',
+    transition: 'stroke 0.2s ease',
+    '&.moving': {
+      stroke: '#F24B4B',
+    },
+    '&.success': {
+      stroke: '#2EA67A',
+    },
+    '&.failure': {
+      stroke: '#FF6B6B',
+    },
+    '@media (min-height: 1440px)': {
+      strokeWidth: 18,
+    },
+  },
+}));
 
 interface Props {
   angle: number;
@@ -12,8 +35,10 @@ interface Props {
 }
 
 const Indicator: React.FC<Props> = ({ angle, offset, multiplier, handleComplete, skillCheck, className }) => {
+  const { classes } = useStyles();
   const [indicatorAngle, setIndicatorAngle] = useState(-90);
   const [keyPressed, setKeyPressed] = useState<false | string>(false);
+  
   const interval = useInterval(
     () =>
       setIndicatorAngle((prevState) => {
@@ -59,17 +84,19 @@ const Indicator: React.FC<Props> = ({ angle, offset, multiplier, handleComplete,
     if (skillCheck.keys && !skillCheck.keys?.includes(keyPressed)) return;
 
     interval.stop();
-
     window.removeEventListener('keydown', keyHandler);
 
-    if (keyPressed !== skillCheck.key || indicatorAngle < angle || indicatorAngle > angle + offset)
-      handleComplete(false);
-    else handleComplete(true);
-
+    const isSuccess = keyPressed === skillCheck.key && indicatorAngle >= angle && indicatorAngle <= angle + offset;
+    handleComplete(isSuccess);
     setKeyPressed(false);
   }, [keyPressed]);
 
-  return <circle transform={`rotate(${indicatorAngle}, 250, 250)`} className={className} />;
+  return (
+    <circle 
+      transform={`rotate(${indicatorAngle}, 250, 250)`} 
+      className={className}
+    />
+  );
 };
 
 export default Indicator;

@@ -11,18 +11,29 @@ interface Props {
 
 const useStyles = createStyles((theme, params: { canClose?: boolean }) => ({
   button: {
-    borderRadius: theme.radius.sm,
+    borderRadius: theme.radius.md, // More rounded
     flex: '1 15%',
     alignSelf: 'stretch',
-    padding: '6px 0',
-    backgroundColor: 'rgba(255, 255, 255, 0.04)',
-    transition: 'background-color 0.2s ease',
+    padding: '8px 4px', // Increased padding
+    backgroundColor: 'rgba(255, 255, 255, 0.05)', // Slightly more opaque
+    transition: 'all 0.2s ease', // Enhanced transition
+    border: '1px solid transparent', // Add border for effect
     '&:hover': {
-      backgroundColor: 'rgba(255, 255, 255, 0.08)',
+      backgroundColor: params.canClose === false 
+        ? 'rgba(255, 255, 255, 0.05)' 
+        : 'rgba(220, 53, 69, 0.8)', // Better red hover for close
+      borderColor: params.canClose === false 
+        ? 'transparent' 
+        : 'rgba(220, 53, 69, 0.9)',
+      transform: params.canClose === false ? 'none' : 'translateY(-1px)', // Lift effect
+      boxShadow: params.canClose === false 
+        ? 'none' 
+        : '0 4px 12px rgba(220, 53, 69, 0.3)', // Red shadow
     },
     '&:disabled': {
-      backgroundColor: 'transparent',
+      backgroundColor: 'rgba(255, 255, 255, 0.02)', // More subtle disabled state
       cursor: 'not-allowed',
+      opacity: 0.5,
     },
   },
   root: {

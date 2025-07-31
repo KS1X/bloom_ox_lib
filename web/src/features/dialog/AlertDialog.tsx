@@ -17,20 +17,77 @@ import MarkdownComponents from '../../config/MarkdownComponents';
 
 const useStyles = createStyles((theme) => ({
   contentStack: {
-    color: theme.colors.dark[0],
+    color: theme.colors.dark[1], // Improved readability
+    gap: theme.spacing.md,
   },
   modal: {
-    backdropFilter: 'blur(12px)',
-    backgroundColor: 'rgba(26, 26, 26, 0.85)',
+    backgroundColor: 'rgba(26, 26, 26, 0.9)', // Consistent with other components
     borderRadius: theme.radius.lg,
-    boxShadow: '0 8px 32px rgba(0, 0, 0, 0.35)',
-    border: `1.33px solid ${theme.colors.dark[4]}`,
+    boxShadow: '0 10px 40px rgba(0, 0, 0, 0.45)', // Enhanced shadow for better depth
+    border: `1px solid ${theme.colors.dark[4]}`, // Consistent border width
+    backdropFilter: 'blur(8px)', // Modern glass effect
+  },
+  title: {
+    color: theme.white,
+    fontSize: 18,
+    fontWeight: 600,
+    textAlign: 'center',
+    marginBottom: theme.spacing.xs,
+    '& h1, & h2, & h3': {
+      color: theme.white,
+      margin: 0,
+      fontSize: 18,
+      fontWeight: 600,
+    },
+  },
+  content: {
+    color: theme.colors.dark[1],
+    lineHeight: 1.6,
+    fontSize: 14,
+    '& p': {
+      margin: `${theme.spacing.xs}px 0`,
+      lineHeight: 1.6,
+    },
+    '& img': {
+      maxWidth: '100%',
+      maxHeight: '300px',
+      borderRadius: theme.radius.md,
+      marginTop: theme.spacing.sm,
+    },
+  },
+  buttonGroup: {
+    marginTop: theme.spacing.lg,
+    gap: theme.spacing.sm,
   },
   button: {
     textTransform: 'uppercase',
     fontWeight: 500,
     letterSpacing: 0.5,
-    height: 36,
+    height: 40, // Slightly larger for better touch targets
+    borderRadius: theme.radius.md,
+    transition: 'all 0.2s ease',
+    '&:hover': {
+      transform: 'translateY(-1px)',
+      boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
+    },
+  },
+  cancelButton: {
+    backgroundColor: 'rgba(255, 255, 255, 0.05)',
+    border: `1px solid ${theme.colors.dark[4]}`,
+    color: theme.colors.dark[1],
+    '&:hover': {
+      backgroundColor: 'rgba(255, 255, 255, 0.1)',
+      borderColor: theme.colors.dark[3],
+      color: theme.white,
+    },
+  },
+  confirmButton: {
+    backgroundColor: '#2EA67A', // Updated primary color
+    border: 'none',
+    color: theme.white,
+    '&:hover': {
+      backgroundColor: '#267A5C', // Darker shade for hover
+    },
   },
 }));
 
@@ -67,47 +124,49 @@ const AlertDialog: React.FC = () => {
       closeOnClickOutside={false}
       onClose={() => closeAlert('cancel')}
       withCloseButton={false}
-      overlayOpacity={0.44}
-      overlayBlur={8}
-      exitTransitionDuration={150}
+      overlayOpacity={0.5} // Slightly increased for better focus
+      overlayBlur={12} // Enhanced blur for modern feel
+      exitTransitionDuration={200}
       transition="fade"
       classNames={{ modal: classes.modal }}
       title={
-        <ReactMarkdown components={MarkdownComponents}>
-          {dialogData.header}
-        </ReactMarkdown>
+        <div className={classes.title}>
+          <ReactMarkdown components={MarkdownComponents}>
+            {dialogData.header}
+          </ReactMarkdown>
+        </div>
       }
     >
       <Stack className={classes.contentStack}>
-        <ReactMarkdown
-          remarkPlugins={[remarkGfm]}
-          components={{
-            ...MarkdownComponents,
-            img: ({ ...props }) => (
-              <img
-                style={{ maxWidth: '100%', maxHeight: '100%' }}
-                {...props}
-              />
-            ),
-          }}
-        >
-          {dialogData.content}
-        </ReactMarkdown>
-        <Group position="right" spacing={10}>
+        <div className={classes.content}>
+          <ReactMarkdown
+            remarkPlugins={[remarkGfm]}
+            components={{
+              ...MarkdownComponents,
+              img: ({ ...props }) => (
+                <img
+                  style={{ maxWidth: '100%', maxHeight: '300px', borderRadius: '8px' }}
+                  {...props}
+                />
+              ),
+            }}
+          >
+            {dialogData.content}
+          </ReactMarkdown>
+        </div>
+        <Group position="right" spacing={12} className={classes.buttonGroup}>
           {dialogData.cancel && (
             <Button
               variant="default"
               onClick={() => closeAlert('cancel')}
-              className={classes.button}
+              className={`${classes.button} ${classes.cancelButton}`}
             >
               {dialogData.labels?.cancel || locale.ui.cancel}
             </Button>
           )}
           <Button
-            variant={dialogData.cancel ? 'light' : 'filled'}
-            color={theme.primaryColor}
             onClick={() => closeAlert('confirm')}
-            className={classes.button}
+            className={`${classes.button} ${classes.confirmButton}`}
           >
             {dialogData.labels?.confirm || locale.ui.confirm}
           </Button>

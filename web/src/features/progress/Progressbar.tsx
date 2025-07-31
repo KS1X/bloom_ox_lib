@@ -12,7 +12,6 @@ const useStyles = createStyles((theme) => ({
     borderRadius: theme.radius.md,
     backgroundColor: 'rgba(20, 20, 20, 0.85)',
     overflow: 'hidden',
-    backdropFilter: 'blur(6px)',
     border: `1px solid ${theme.colors.dark[4]}`,
     boxShadow: '0 10px 24px rgba(0,0,0,0.35)',
   },
@@ -28,7 +27,7 @@ const useStyles = createStyles((theme) => ({
   },
   bar: {
     height: '100%',
-    backgroundColor: '#30AF82', // Your brand primary
+    backgroundColor: '#2EA67A', // Updated brand primary
     borderRadius: theme.radius.md,
     transition: 'width 0.3s ease-in-out',
   },

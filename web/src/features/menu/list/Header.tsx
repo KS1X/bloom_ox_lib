@@ -6,22 +6,23 @@ const useStyles = createStyles((theme) => ({
     textAlign: 'center',
     borderTopLeftRadius: theme.radius.lg,
     borderTopRightRadius: theme.radius.lg,
-    backgroundColor: 'rgba(30, 30, 30, 0.85)',
-    backdropFilter: 'blur(10px)',
-    height: 60,
+    backgroundColor: 'rgba(30, 30, 30, 0.9)', // Slightly more opaque
+    height: 64, // Slightly larger
     width: 384,
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
     borderBottom: `1px solid ${theme.colors.dark[4]}`,
-    boxShadow: '0 1px 4px rgba(0, 0, 0, 0.2)',
+    boxShadow: '0 2px 8px rgba(0, 0, 0, 0.3)', // Enhanced shadow
+    backdropFilter: 'blur(4px)', // Subtle glass effect
   },
   heading: {
     fontSize: 20,
     textTransform: 'uppercase',
-    fontWeight: 500,
-    letterSpacing: 0.5,
+    fontWeight: 600, // Slightly bolder
+    letterSpacing: 0.8, // Increased letter spacing
     color: theme.white,
+    lineHeight: 1.2, // Better line height
   },
 }));
 
